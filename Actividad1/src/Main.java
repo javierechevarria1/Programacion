@@ -80,7 +80,44 @@ y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852
         System.out.println("El mayor es: " + Math.max(numm1, numm2));
         System.out.println("¿Son iguales?: " + (numm1 == numm2));
 /* 10.  Escribe un programa que lea tres números distintos y nos diga cuál es el mayor.  */
+        System.out.println("Ejercicio10");
+        System.out.println("Ingrese el primer numero: ");
+        double nummm1 = scan.nextDouble();
+        System.out.println("Ingrese el segundo numero: ");
+        double nummm2 = scan.nextDouble();
+        System.out.println("Ingrese el tercer numero: ");
+        double nummm3 = scan.nextDouble();
 
+        System.out.println("El mayor es: " + Math.max(nummm1, Math.max(nummm2, nummm3)));
+/* 11. Escribe un programa que lee dos números, calcula y muestra el valor de su suma, resta,
+producto y división. (Ten en cuenta la división por cero). */
+        System.out.println("Ejercicio11");
+        System.out.println("Ingrese el primer numero: ");
+        double nummmm1 = scan.nextDouble();
+        System.out.println("Ingrese el segundo numero: ");
+        double nummmm2 = scan.nextDouble();
+
+        System.out.println("La suma es: " + (nummmm1 + nummmm2));
+        System.out.println("La resta es: " + (nummmm1 - nummmm2));
+        System.out.println("El producto es: " + (nummmm1 * nummmm2));
+        System.out.println("La division es: " + (nummmm1 / nummmm2));
+
+/* 12. Escribe un programa que lee 2 números y muestra el mayor. */
+        System.out.println("Ejercicio12");
+        System.out.println("Ingrese el primer numero: ");
+        double nummmmm1 = scan.nextDouble();
+        System.out.println("Ingrese el segundo numero: ");
+        double nummmmm2 = scan.nextDouble();
+
+        System.out.println("El mayor es: " + Math.max(nummmmm1, nummmmm2));
+
+/* 13. Escribe un programa que lee un número y me dice si es positivo o negativo
+consideraremos el cero como positivo. */
+        System.out.println("Ejercicio13");
+        System.out.println("Ingrese el primero numero: ");
+        double nummmmmm1 =scan.nextDouble();
+
+        System.out.println("¿Es positivo o cero?: " + (nummmmmm1 >= 0));
 
     }
 }
