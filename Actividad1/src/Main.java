@@ -19,7 +19,7 @@ import java.util.Scanner;
         double lado2 = scan.nextDouble();
         System.out.println("El area del cuadrado es: " + (lado2 * lado2));
 
-/* 4.Escribe un programa que lea dos números, calcule y muestre el valor de sus suma, resta, producto y división. */
+/* 4. Escribe un programa que lea dos números, calcule y muestre el valor de sus suma, resta, producto y división. */
         System.out.println("Ejercicio 4");
         System.out.println("Ingrese el primer numero");
         double num1 = scan.nextDouble();
@@ -31,7 +31,7 @@ import java.util.Scanner;
         System.out.println("Producto: " + (num1 * num2));
         System.out.println("Division: " + (num1 / num2));
 
-/* 5.Escribe un programa que toma como dato de entrada un número que corresponde a la
+/* 5. Escribe un programa que toma como dato de entrada un número que corresponde a la
 longitud de un radio y nos escribe la longitud de la circunferencia, el área del círculo y el
 volumen de la esfera que corresponden con dicho radio. */
         System.out.println("Ejercicio 5");
@@ -42,7 +42,7 @@ volumen de la esfera que corresponden con dicho radio. */
         System.out.println("El area de la circunferencia es: " + (Math.PI * radio * radio));
         System.out.println("El volumen de la esfera es: " + ((4/3.0) * Math.PI * Math.pow(radio, 3)));
 
-/* 6.Escribe un programa que dado el precio de un artículo y el precio de venta real nos
+/* 6. Escribe un programa que dado el precio de un artículo y el precio de venta real nos
 muestre el porcentaje de descuento realizado. */
         System.out.println("Ejercicio 6");
         System.out.println("El precio del articulo es: ");
@@ -52,10 +52,34 @@ muestre el porcentaje de descuento realizado. */
         double precio2 = scan.nextDouble();
 
         System.out.println("El porcentaje de descuento es: " + ((precio1 - precio2 ) / precio1 * 100));
-/* 7.Escribe un programa que lea un valor correspondiente a una distancia en millas marinas
+/* 7. Escribe un programa que lea un valor correspondiente a una distancia en millas marinas
 y escriba la distancia en metros. Sabiendo que una milla marina equivale a 1.852 metros. */
+        System.out.println("Ejercicio7");
+        System.out.println("Distancia en millas marinas: ");
+        double distancia1 = scan.nextDouble();
 
+        System.out.println("La distancia en metros es: " + (distancia1 * 1.852));
+/* 8. Escribe un programa que lee dos números y los visualiza en orden ascendente.*/
+        System.out.println("Ejercicio8");
+        System.out.println("Ingrese el primer numero: ");
+        double n1 = scan.nextDouble();
+        System.out.println("Ingrese el segundo numero: ");
+        double n2 = scan.nextDouble();
 
+        double menor = Math.min(n1, n2);
+        double mayor = Math.max(n1, n2);
+
+        System.out.println("Orden ascendente: " + menor + " y " + mayor);
+/* 9. Escribe un programa que lee dos números y nos dice cuál es el mayor o si son iguales. */
+        System.out.println("Ejercicio9");
+        System.out.println("Ingrese el primero numero: ");
+        double numm1 = scan.nextDouble();
+        System.out.println("Ingrese el segundo numero; ");
+        double numm2 = scan.nextDouble();
+
+        System.out.println("El mayor es: " + Math.max(numm1, numm2));
+        System.out.println("¿Son iguales?: " + (numm1 == numm2));
+/* 10.  Escribe un programa que lea tres números distintos y nos diga cuál es el mayor.  */
 
 
     }
