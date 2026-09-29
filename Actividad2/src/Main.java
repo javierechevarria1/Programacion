@@ -21,10 +21,9 @@ mayor de edad” o el mensaje de “eres menor de edad”. */
         System.out.println("Introduzca su edad: ");
         edad = scan.nextInt();
 
-        if (edad >= 18){
+        if (edad >= 18) {
             System.out.println("Eres mayor de edad");
-        }
-        else {
+        } else {
             System.out.println("Eres menor de edad");
         }
 
@@ -32,58 +31,92 @@ mayor de edad” o el mensaje de “eres menor de edad”. */
 /* 3. Realiza un programa que muestre por pantalla los 20 primeros números naturales (1, 2,
 3... 20). */
         System.out.println("Ejercicio 3");
-        System.out.println("Estos son los primeros 20 numeros naturales: " );
-        for (int cont = 1; cont <= 20; cont++){
+        System.out.println("Estos son los primeros 20 numeros naturales: ");
+        for (int cont = 1; cont <= 20; cont++) {
             System.out.println(cont);
         }
-    /* 4. Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
+/* 4. Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
 Para ello utiliza un contador y suma de 2 en 2. */
         System.out.println("Ejercicio 4");
-        System.out.println("Estos son los numeros pares comprendidos entre el 1 y el 200: " );
-        for (int cont = 2; cont <= 200; cont += 2){
+        System.out.println("Estos son los numeros pares comprendidos entre el 1 y el 200: ");
+        for (int cont = 2; cont <= 200; cont += 2) {
             System.out.println(cont);
         }
 
-    /* 5. Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
+/* 5. Realiza un programa que muestre los números pares comprendidos entre el 1 y el 200.
 Esta vez utiliza un contador sumando de 1 en 1. */
         System.out.println("Ejercicio 5");
-        System.out.println("Estos son los numeros pares comprendidos entre el 1 y el 200: " );
+        System.out.println("Estos son los numeros pares comprendidos entre el 1 y el 200: ");
         for (int cont = 1; cont <= 200; cont++) {
             if (cont % 2 == 0) {
                 System.out.println(cont);
             }
         }
 
-    /* 6. Realiza un programa que muestre los números desde el 1 hasta un número N que se
+/* 6. Realiza un programa que muestre los números desde el 1 hasta un número N que se
 introducirá por teclado. */
         System.out.println("Ejercicio 6");
         scan = new Scanner(System.in);
         System.out.println("Introduce el numero limite: ");
         int n = scan.nextInt();
         System.out.println("Estos son los numeros desde el 1 hasta el " + n + ":");
-        for (int cont = 1; cont<= n; cont ++){
+        for (int cont = 1; cont <= n; cont++) {
             System.out.println(cont);
         }
-    /* 7. Escribe un programa que lea una calificación numérica entre 0 y 10 y la transforma en
+/* 7. Escribe un programa que lea una calificación numérica entre 0 y 10 y la transforma en
 calificación alfabética, escribiendo el resultado. */
         System.out.println("Ejercicio 7");
         scan = new Scanner(System.in);
+        int nota;
         System.out.println("Introduce la nota: ");
+        nota = scan.nextInt();
+
+        if (nota < 0 || nota > 10) {
+            System.out.println("Nota no válida. Debe estar entre 0 y 10.");
+        } else if (nota < 3) {
+            System.out.println("Muy Deficiente");
+        } else if (nota < 5) {
+            System.out.println("Insuficiente");
+        } else if (nota < 6) {
+            System.out.println("Suficiente");
+        } else if (nota < 7) {
+            System.out.println("Bien");
+        } else if (nota < 9) {
+            System.out.println("Notable");
+        } else {
+            System.out.println("Sobresaliente");
+        }
 
 
-    /* 8.  */
+/* 8. Realiza un programa que lea un número positivo N y calcule y visualice su factorial N!
+Siendo el factorial: */
+        System.out.println("Ejercicio 8");
+        scan = new Scanner(System.in);
+        System.out.println("Introduce un numero: ");
+        n = scan.nextInt(); //Aqui la variable n ya existe arriba en los otros ejercicios sino seria int n
+        long factorial = 1;
 
-    /* 9.  */
+        if (n < 0) {
+            System.out.println("Error: El numero debe ser positivo");
+        } else {
+            for (int i = n; i > 0; i--) {
+                factorial = factorial * i;
+            }
+            System.out.println("Resultado: " + factorial);
+        }
 
-    /* 10.  */
 
-    /* 11.  */
+/* 9.  */
 
-    /* 12.  */
+/* 10.  */
 
-    /* 13.  */
+/* 11.  */
 
-    /* 14.  */
+/* 12.  */
+
+/* 13.  */
+
+/* 14.  */
 
 
     }
