@@ -6,8 +6,8 @@ public class Main {
     public static void main (String[] args) {
         System.out.println("Ejercicio 1");
         Scanner scan = new Scanner(System.in);
-        int edad;
         System.out.println("Introduzca su edad: ");
+        int edad;
         edad = scan.nextInt();
 
         if (edad >= 18) {
@@ -23,8 +23,12 @@ mayor de edad” o el mensaje de “eres menor de edad”. */
 
         if (edad >= 18) {
             System.out.println("Eres mayor de edad");
-        } else {
-            System.out.println("Eres menor de edad");
+        }
+        else if (edad <18 && edad >= 0) {
+            System.out.println("Eres menor");
+        }
+        else {
+            System.out.println("La edad de una persona no puede ser numero negativo");
         }
 
 
@@ -67,9 +71,9 @@ introducirá por teclado. */
 calificación alfabética, escribiendo el resultado. */
         System.out.println("Ejercicio 7");
         scan = new Scanner(System.in);
-        int nota;
+        double nota;
         System.out.println("Introduce la nota: ");
-        nota = scan.nextInt();
+        nota = scan.nextDouble();
 
         if (nota < 0 || nota > 10) {
             System.out.println("Nota no válida. Debe estar entre 0 y 10.");
@@ -94,7 +98,7 @@ Siendo el factorial: */
         scan = new Scanner(System.in);
         System.out.println("Introduce un numero: ");
         n = scan.nextInt(); //Aqui la variable n ya existe arriba en los otros ejercicios sino seria "int n"
-        long factorial = 1;
+        double factorial = 1;
 
         if (n < 0) {
             System.out.println("Error: El numero debe ser positivo");
