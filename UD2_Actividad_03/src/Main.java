@@ -7,7 +7,7 @@ public class Main {
         System.out.println("Ejercicio 1");
         Scanner scan = new Scanner(System.in);
         System.out.println("Introduce la cantidad de euros: ");
-        int num = scan.nextInt();
+        int num = Math.abs(scan.nextInt()); // Asegura que el número sea siempre positivo
 
         int billetes500 = num / 500; // Variable que calcula cuantos billetes de 500 caben
         num = num % 500; // Guarda el dinero que sobra para la siguiente variable/billete
