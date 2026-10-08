@@ -51,6 +51,7 @@ y luego lo recorra para averiguar el máximo y mínimo y mostrarlos por pantalla
             System.out.println("Introduce un numero: ");
             num[i] = scan.nextDouble();
             suma = suma + num[i]; // Esto suma el numero a la cuenta o sea lo guarda
+
         }
 
     }
