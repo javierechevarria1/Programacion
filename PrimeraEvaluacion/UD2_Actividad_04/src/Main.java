@@ -162,7 +162,7 @@ todos los valores desde P hasta Q, y lo muestre por pantalla. */
         int Q = scan.nextInt();
 
         // Calcular el tamaño y crear array
-        int tamaño = (Q - P) + 1;
+        int tamaño = Math.abs(Q - P) + 1;
         int[] rangoValores = new int [tamaño];
 
         // Primer bucle: Rellenar el array con los valores consecutivos desde P hasta Q
@@ -183,6 +183,104 @@ utilizando Math.random(), y luego le pida al usuario un valor real R. Por últim
 cuántos valores del array son igual o superiores a R. */
         System.out.println("Ejercicio 8");
         scan = new Scanner(System.in);
+
+        double[] aleatorios = new double[100]; // Array para los 100
+
+        // Bucle rellenar array con números aleatorios entre 0.0 y 1.0
+        for (int i = 0; i < aleatorios.length; i++) {
+            aleatorios[i] = Math.random();
+        }
+
+        // Pedimos por teclado valor de R
+        System.out.println("Introduce el valor real R (entre 0.0 y 1.0): ");
+        double R = scan.nextDouble();
+
+        int contador = 0; // Variable contador
+
+        // Bucle para rrecorrer array y contar iguales o superiores a R
+        for (int i = 0; i < aleatorios.length; i++){
+            if (aleatorios[i] >= R){
+                contador++; // Si es igual o mayor, sumamos 1
+            }
+        }
+        System.out.println("Cantidad de valores iguales o superiores a " + R + ": " + contador);
+
+/* 9. Crea un programa que cree un array de enteros de tamaño 100 y lo rellene con valores
+enteros aleatorios entre 1 y 10 (utiliza 1 + Math.random()*10). Luego pedirá un valor N
+y mostrará en qué posiciones del array aparece N. */
+        System.out.println("Ejercicio 9");
+        scan = new Scanner(System.in);
+
+        // 1. Crear el array de enteros de tamaño 100
+        int[] enteros2 = new int[100];
+
+        // Bucle: Rellenar el array con enteros aleatorios entre 1 y 10
+        for (int i = 0; i < enteros2.length; i++) {
+            enteros2[i] = (int) (1 + Math.random() * 10);
+        }
+
+        // Pedir al usuario el valor N a buscar
+        System.out.print("Introduce un valor entero N a buscar (entre 1 y 10): ");
+        N = scan.nextInt(); // Ya esta declarada arriba entonces no especifico la variable con INT
+
+        // Bucle: Buscar y mostrar en qué posiciones aparece N
+        System.out.print("El número " + N + " aparece en las posiciones: ");
+        for (int i = 0; i < enteros2.length; i++) {
+            if (enteros2[i] == N) {
+                System.out.print(i + " "); // Muestra la posición (i) seguida de un espacio
+            }
+        }
+        System.out.println(); // Salto de línea final para limpiar la consola
+
+
+/* 10. Crea un programa para realizar cálculos relacionados con la altura (en metros) de
+personas. Pedirá un valor N y luego almacenará en un array N alturas introducidas por teclado. Luego mostrará la altura media, máxima y mínima, así como cuántas personas
+miden por encima y por debajo de la media. */
+        System.out.println("Ejercicio 10");
+        scan = new Scanner(System.in);
+
+        // Bucle para pedir el número de personas N
+        System.out.print("Introduce el número de personas (N): ");
+        N = scan.nextInt();
+
+        // Crear el array de alturas reales y variables de cálculo
+        double[] alturas = new double[N];
+        suma = 0; // Ya esta creada sino iria el double
+
+        // Bucle pedir y almacenar las alturas en el array
+        for (int i = 0; i < alturas.length; i++) {
+            System.out.print("Introduce la altura de la persona " + (i + 1) + " (en metros): ");
+            alturas[i] = scan.nextDouble();
+        }
+
+        // Bucle calcular la suma total para poder sacar la media
+        for (int i = 0; i < alturas.length; i++) {
+            suma += alturas[i];
+        }
+
+        media = suma / N; // Ya esta creada sino iria el double
+        System.out.println("La altura media es: " + media + " metros.");
+
+        // Variables contadoras para la clasificación
+        int porEncima = 0;
+        int porDebajo = 0;
+
+        // Bucle para comparar cada altura con la media calculada
+        for (int i = 0; i < alturas.length; i++) {
+            if (alturas[i] > media) {
+                porEncima++;
+            } else if (alturas[i] < media) {
+                porDebajo++;
+            }
+        }
+
+        System.out.println("Personas por encima de la media: " + porEncima);
+        System.out.println("Personas por debajo de la media: " + porDebajo);
+
+/* 11. Crea un programa que cree dos arrays de enteros de tamaño 100. Luego introducirá en
+el primer array todos los valores del 1 al 100. Por último, deberá copiar todos los valores
+del primer array al segundo array en orden inverso, y mostrar ambos por pantalla. */
+
 
 
     }
