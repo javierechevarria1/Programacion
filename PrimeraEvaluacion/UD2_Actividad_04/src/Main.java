@@ -280,8 +280,124 @@ miden por encima y por debajo de la media. */
 /* 11. Crea un programa que cree dos arrays de enteros de tamaño 100. Luego introducirá en
 el primer array todos los valores del 1 al 100. Por último, deberá copiar todos los valores
 del primer array al segundo array en orden inverso, y mostrar ambos por pantalla. */
+        System.out.println("Ejercicio 11");
+        scan = new Scanner(System.in);
+
+        // Crear los dos arrays de enteros de tamaño 100
+        int[] array1 = new int[100];
+        int[] array2 = new int[100];
+
+        // Bucle para rellenar el primero del 1 al 100 y copiarlo al segundo al revés
+        for (int i = 0; i < 100; i++) {
+            array1[i] = i + 1; // Rellena array1: 1, 2, 3...
+            array2[99 - i] = array1[i]; // Copia a array2 en orden inverso: 100, 99, 98...
+        }
+
+        // Bucle mostrar el primer array por pantalla
+        System.out.println("Contenido del Array 1:");
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Posición " + (i + 1) + ": " + array1[i]);
+        }
+
+        // Bucle mostrar el segundo array por pantalla
+        System.out.println("Contenido del Array 2 (Inverso):");
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Posición " + (i + 1) + ": " + array2[i]);
+        }
+
+/* 12. Crea un programa que cree un array de 10 enteros y luego muestre el siguiente menú
+con distintas opciones:
+a. Mostrar valores.
+b. Introducir valor.
+c. Salir.
+La opción ‘a’ mostrará todos los valores por pantalla. La opción ‘b’ pedirá un valor V y una
+posición P, luego escribirá V en la posición P del array. El menú se repetirá indefinidamente hasta
+que el usuario elija la opción ‘c’ que terminará el programa. */
+        System.out.println("Ejercicio 12");
+        scan = new Scanner(System.in);
+
+        int numerosE12[] = new int[10]; // Array de 10 enteros
+        String opcionE12 = ""; // Opcion
+
+        // Bucle para repetir el menu hasta poner C
+        while (!opcionE12.equals("c")) {
+            IO.println("");
+            IO.println("--- MENÚ ---");
+            IO.println("a. Mostrar valores.");
+            IO.println("b. Introducir valor.");
+            IO.println("c. Salir.");
+            IO.println("Elige una opcion: ");
+            opcionE12 = scan.next();
+
+            // Opción A: Mostrar el contenido del array
+            if (opcionE12.equals("a")) {
+                IO.println("Valores actuales del array:");
+                for (int i = 0; i < numerosE12.length; i++) {
+                    IO.println("Posicion " + (i + 1) + ": " + numerosE12[i]);
+                }
+            }
+
+            // Opción B: Guardar un valor en una posicion elegida
+            if (opcionE12.equals("b")) {
+                IO.println("Introduce el valor a guardar (V): ");
+                int vE12 = scan.nextInt();
+                IO.println("Introduce la posicion donde guardarlo (P, de 1 a 10): ");
+                int pE12 = scan.nextInt();
+
+                numerosE12[pE12 - 1] = vE12;
+                IO.println("¡Valor guardado con éxito!");
+            }
+        }
+        IO.println("Fin del programa. ¡Hasta pronto!");
+
+/* 13. Crea un programa que permita al usuario almacenar una secuencia aritmética en un
+array y luego mostrarla. Una secuencia aritmética es una serie de números que
+comienza por un valor inicial V, y continúa con incrementos de I. Por ejemplo, con V=1
+e I=2, la secuencia sería 1, 3, 5, 7, 9… Con V=7 e I=10, la secuencia sería 7, 17, 27, 37… El
+programa solicitará al usuario V, I además de N (nº de valores a crear). */
+        System.out.println("Ejercicio 13");
+        scan = new Scanner(System.in);
+
+        IO.println("Introduce el valor de N: ");
+        int N13 = scan.nextInt();
+        IO.println("Introduce el valor de V: ");
+        int V13 = scan.nextInt();
+        IO.println("Introduce el valor de I: ");
+        int I13 = scan.nextInt();
+
+        int numerosE13[] = new int[N13]; // Array con el tamaño N
+
+        for(int i = 0; i < numerosE13.length; i++){
+            numerosE13[i] = V13 + (i * I13);
+        }
+
+        for(int i = 0; i < numerosE13.length; i++){
+            IO.println(numerosE13[i]);
+        }
 
 
+/* 14. Crea un programa que cree un array de enteros e introduzca la siguiente secuencia de
+valores: 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, etc. hasta introducir 10 diez veces, y luego la
+muestre por pantalla. */
+        System.out.println("Ejercicio 14");
+        scan = new Scanner(System.in);
+
+        // Crear el array de enteros con el tamaño total exacto (55)
+        int numerosE14[] = new int[55];
+        int posicion = 0; // Variable para controlar la casilla actual del array
+
+        // Bucle rellenar el array con la secuencia repetida
+        for (int numero = 1; numero <= 10; numero++) { // El bucle numero va del 1 al 10
+            // El bucle repeticiones hace que cada número se guarde tantas veces como indica su valor
+            for (int repeticiones = 1; repeticiones <= numero; repeticiones++) {
+                numerosE14[posicion] = numero;
+                posicion++; // Avanzamos a la siguiente casilla del array
+            }
+        }
+        // Bucle mostrar el array por pantalla
+        for (int i = 0; i < numerosE14.length; i++) {
+            IO.println(numerosE14[i]);
+        }
 
     }
 }
