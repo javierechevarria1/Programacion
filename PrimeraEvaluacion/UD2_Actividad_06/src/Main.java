@@ -7,7 +7,7 @@ y luego muestre la matriz por pantalla. */
         System.out.println("Ejercicio 1");
         Scanner scan = new Scanner(System.in);
 
-        
+
 
     }
 }
