@@ -25,7 +25,7 @@ y luego muestre la matriz por pantalla. */
             for (int j = 0; j < matriz[i].length; j++) {
                 System.out.print(matriz[i][j] + " "); // Espacio en blanco entre los numeros
             }
-            System.out.println(); // Salto de línea al terminar cada fila
+            System.out.println(); // Salto de línea
         }
 
 
@@ -137,7 +137,7 @@ programa mostrará la nota mínima, máxima y media de cada alumno. */
             double media = suma / notasAlumnos[i].length; // Calculr la media
 
 
-            System.out.println("Alumno " + (i + 1) + ":");
+            System.out.println("Alumno " + (i + 1) + ": ");
             System.out.println("  Nota mínima: " + minimo);
             System.out.println("  Nota máxima: " + maximo);
             System.out.println("  Nota media:  " + media);
@@ -148,7 +148,7 @@ y detectar si existe brecha salarial entre ambos. El programa pedirá por teclad
 de N personas distintas (valor también introducido por teclado). Para cada persona, pedirá su
 género (0 para varón y 1 para mujer) y su sueldo. Esta información debe guardarse en una única
 matriz. Luego se mostrará por pantalla el sueldo medio de cada género. */
-        System.out.println("Ejercicio 4");
+        System.out.println("Ejercicio 5");
         scan = new Scanner(System.in);
 
         System.out.println("Introduce el número de personas (N): ");
