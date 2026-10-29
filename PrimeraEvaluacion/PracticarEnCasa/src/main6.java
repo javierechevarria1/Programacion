@@ -50,7 +50,7 @@ public class main6 {
 
                     System.out.println("Introduce un numero:");
                     double num5 = reader1.nextDouble();
-                    System.out.println("Introduce un numero");
+                    System.out.println("Introduce un numero:");
                     double num6 = reader1.nextDouble();
                     reader1.nextLine();
                     double resto = num5 % num6; // El operador % obtiene el residuo sobrante de la división
