@@ -31,7 +31,6 @@ public class Biblioteca {
     public String getCodigo() {
         return this.codigo;
     }
-
     public String getDireccion() {
         return this.direccion;
     }
@@ -115,7 +114,25 @@ public class Biblioteca {
 
         return infoBiblio;
     }
+
+    //Insertar libros en la biblioteca
+    public boolean insertarLibro(Libro libro){...}
+
+    //Mostrar informacion de la biblioteca
+    public String infoBiblioteca{...}
+
     //Mostrar informacion de todos los libros almacenados
+    public String infoLibrosBiblioteca(){
+        String infoLibros = "";
+        //Recorrer el array
+        for(libro l : this.libros){
+
+        }
+    }
+
+    //Eliminar libros
+
+
 
     //Reflexionar opciones: ampliar dimension del array
     private void ampliarDimensionBiblioteca(){
