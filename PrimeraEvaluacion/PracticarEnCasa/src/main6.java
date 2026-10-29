@@ -11,11 +11,9 @@ public class main6 {
 
             System.out.println("Menu");
             System.out.println("1-Calcular la potencia");
-            System.out.println("-Estadisticas avanzadas");
             System.out.println("2-Calcular la raiz cuadrada");
             System.out.println("3-Calcular el resto de la division");
             System.out.println("4-Calcular el area de un triangulo");
-            System.out.println("-Ampliar las operaciones");
             System.out.println("5-Salir");
             System.out.println("Elige una opcion: ");
 

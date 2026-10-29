@@ -11,11 +11,9 @@ public class main7 {
 
                 System.out.println("Menu");
                 System.out.println("1-Suma de valores no nulos");
-                System.out.println("-Estadisticas de la coleccion");
                 System.out.println("2-Maximo de la eleccion");
                 System.out.println("3-Minimo de la eleccion");
                 System.out.println("4-Media de los numeros");
-                System.out.println("-Ampliar el valor de la coleccion");
                 System.out.println("5-Salir");
                 System.out.println("Elige una opcion: ");
 
