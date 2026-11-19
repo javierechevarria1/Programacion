@@ -1,6 +1,10 @@
+
 package Proyecto2;
+
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class main10 {
 
@@ -11,15 +15,15 @@ public class main10 {
         System.out.println("Introduce el nombre del centro:");
         String nombreCentro = entrada.nextLine();
 
-        System.out.println("Introduce el CIF:");
-        String cif = entrada.nextLine();
+        String cif = leerPatron(entrada, "Introduce el CIF:", "[A-Z][0-9]{10}");
+
+        LocalDate fechaApertura = leerFecha(entrada, "Introduce la fecha de apertura (dd/MM/aaaa):");
 
         int maxSocios;
 
         do {
             System.out.println("Introduce el numero maximo de socios:");
-            maxSocios = entrada.nextInt();
-            entrada.nextLine();
+            maxSocios = Integer.parseInt(leerPatron(entrada, "", "[0-9]{1,9}"));
 
             if (maxSocios <= 0) {
                 System.out.println("La cantidad debe ser mayor que 0");
@@ -27,8 +31,9 @@ public class main10 {
 
         } while (maxSocios <= 0);
 
-        CentroDeportivo centro = new CentroDeportivo(nombreCentro, cif, maxSocios);
+        CentroDeportivo centro = new CentroDeportivo(nombreCentro, cif, fechaApertura, maxSocios);
 
+        // Personas pendientes de registrar
         Socio[] personas = new Socio[maxSocios];
         int nPersonas = 0;
 
@@ -36,7 +41,7 @@ public class main10 {
 
         do {
 
-            System.out.println("MENU CENTRO DEPORTIVO");
+            System.out.println("\nMENU CENTRO DEPORTIVO");
             System.out.println("1. Crear persona");
             System.out.println("2. Registrar socio");
             System.out.println("3. Mostrar informacion del centro");
@@ -60,21 +65,19 @@ public class main10 {
                         System.out.println("Introduce el nombre:");
                         String nombre = entrada.nextLine();
 
-                        System.out.println("Introduce el DNI:");
-                        String dni = entrada.nextLine();
+                        String dni = leerPatron(entrada, "Introduce el DNI:", "[0-9]{8}[A-Z]");
 
                         boolean repetido = centro.buscarSocio(dni);
 
                         for (int i = 0; i < nPersonas; i++) {
+
                             if (personas[i].getDni().equalsIgnoreCase(dni)) {
                                 repetido = true;
                             }
                         }
 
-                        if (dni.isEmpty()) {
-                            System.out.println("El DNI no puede estar vacio");
+                        if (repetido) {
 
-                        } else if (repetido) {
                             System.out.println("Ya existe una persona con ese DNI");
 
                         } else {
@@ -82,29 +85,14 @@ public class main10 {
                             System.out.println("Introduce la direccion:");
                             String direccion = entrada.nextLine();
 
-                            System.out.println("Introduce la fecha de nacimiento (AAAA-MM-DD):");
-                            LocalDate fecha = LocalDate.parse(entrada.nextLine());
+                            LocalDate fecha = leerFecha(entrada, "Introduce la fecha de nacimiento (dd/MM/aaaa):");
 
-                            System.out.println("Introduce el telefono:");
-                            long telefono = entrada.nextLong();
+                            Socio persona = new Socio(nombre, dni, direccion, fecha);
 
-                            System.out.println("Introduce la cuota mensual:");
-                            double cuota = entrada.nextDouble();
-                            entrada.nextLine();
+                            personas[nPersonas] = persona;
+                            nPersonas++;
 
-                            if (cuota < 0) {
-                                System.out.println("La cuota no puede ser negativa");
-
-                            } else {
-
-                                Socio persona = new Socio(nombre, dni, direccion,
-                                        fecha, telefono, cuota);
-
-                                personas[nPersonas] = persona;
-                                nPersonas++;
-
-                                System.out.println("Persona creada correctamente");
-                            }
+                            System.out.println("Persona creada correctamente");
                         }
 
                     } else {
@@ -115,9 +103,24 @@ public class main10 {
 
                 case "2":
 
-                    if (nPersonas > 0) {
+                    if (centro.getNumeroSocios() >= centro.getMaxSocios()) {
+                        System.out.println("No hay espacio en el centro deportivo");
+                        break;
+                    }
 
-                        System.out.println("Personas pendientes: ");
+                    System.out.println("1. Registrar persona existente");
+                    System.out.println("2. Registrar socio nuevo");
+
+                    String registro = entrada.nextLine();
+
+                    if (registro.equals("1")) {
+
+                        if (nPersonas == 0) {
+                            System.out.println("No hay personas pendientes");
+                            break;
+                        }
+
+                        System.out.println("Personas pendientes:");
 
                         for (int i = 0; i < nPersonas; i++) {
                             System.out.println(personas[i].mostrarInfoSocio());
@@ -138,9 +141,22 @@ public class main10 {
 
                         if (posicion != -1) {
 
-                            if (centro.registrarSocio(personas[posicion])) {
+                            Socio p = personas[posicion];
 
-                                System.out.println("Socio registrado correctamente");
+                            long telefono = Long.parseLong(leerPatron(entrada, "Introduce el telefono:", "[0-9]{9}"));
+
+                            double cuota = leerCuota(entrada);
+
+                            Socio nuevo = new Socio(
+                                    p.getNombre(),
+                                    p.getDni(),
+                                    p.getDireccion(),
+                                    p.getFechaNacimiento(),
+                                    telefono,
+                                    cuota
+                            );
+
+                            if (centro.registrarSocio(nuevo)) {
 
                                 for (int i = posicion; i < nPersonas - 1; i++) {
                                     personas[i] = personas[i + 1];
@@ -149,16 +165,64 @@ public class main10 {
                                 nPersonas--;
                                 personas[nPersonas] = null;
 
+                                System.out.println("Socio registrado correctamente");
+
                             } else {
                                 System.out.println("No se ha podido registrar el socio");
                             }
 
                         } else {
-                            System.out.println("No existe una persona pendiente con ese DNI");
+                            System.out.println("No existe una persona con ese DNI");
+                        }
+
+                    } else if (registro.equals("2")) {
+
+                        System.out.println("Introduce el nombre:");
+                        String nombreSocio = entrada.nextLine();
+
+                        String dniSocio = leerPatron(entrada, "Introduce el DNI:", "[0-9]{8}[A-Z]");
+
+                        boolean duplicado = centro.buscarSocio(dniSocio);
+
+                        for (int i = 0; i < nPersonas; i++) {
+
+                            if (personas[i].getDni().equalsIgnoreCase(dniSocio)) {
+                                duplicado = true;
+                            }
+                        }
+
+                        if (!duplicado) {
+
+                            System.out.println("Introduce la direccion:");
+                            String direccionSocio = entrada.nextLine();
+
+                            LocalDate fechaSocio = leerFecha(entrada, "Introduce la fecha de nacimiento (dd/MM/aaaa):");
+
+                            long telefonoSocio = Long.parseLong(leerPatron(entrada, "Introduce el telefono:", "[0-9]{9}"));
+
+                            double cuotaSocio = leerCuota(entrada);
+
+                            Socio nuevo = new Socio(
+                                    nombreSocio,
+                                    dniSocio,
+                                    direccionSocio,
+                                    fechaSocio,
+                                    telefonoSocio,
+                                    cuotaSocio
+                            );
+
+                            if (centro.registrarSocio(nuevo)) {
+                                System.out.println("Socio registrado correctamente");
+                            } else {
+                                System.out.println("No se ha podido registrar el socio");
+                            }
+
+                        } else {
+                            System.out.println("Ya existe una persona con ese DNI");
                         }
 
                     } else {
-                        System.out.println("No hay personas pendientes");
+                        System.out.println("Opcion no valida");
                     }
 
                     break;
@@ -211,7 +275,7 @@ public class main10 {
 
                     if (nPersonas > 0) {
 
-                        System.out.println("Personas pendientes: ");
+                        System.out.println("Personas pendientes:");
 
                         for (int i = 0; i < nPersonas; i++) {
                             System.out.println(personas[i].mostrarInfoSocio());
@@ -274,5 +338,74 @@ public class main10 {
         } while (!opcion.equals("10"));
 
         entrada.close();
+    }
+
+    // Leer y validar un texto
+    public static String leerPatron(Scanner entrada, String mensaje, String patron) {
+
+        String texto;
+
+        do {
+
+            System.out.println(mensaje);
+            texto = entrada.nextLine();
+
+            if (!texto.matches(patron)) {
+                System.out.println("Formato incorrecto");
+            }
+
+        } while (!texto.matches(patron));
+
+        return texto;
+    }
+
+    // Leer y validar una fecha
+    public static LocalDate leerFecha(Scanner entrada, String mensaje) {
+
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(java.time.format.ResolverStyle.STRICT);
+
+        LocalDate fecha = null;
+
+        do {
+
+            System.out.println(mensaje);
+
+            try {
+                fecha = LocalDate.parse(entrada.nextLine(), formato);
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha incorrecta");
+            }
+
+        } while (fecha == null);
+
+        return fecha;
+    }
+
+    // Leer y validar cuota mensual
+    public static double leerCuota(Scanner entrada) {
+
+        double cuota;
+
+        do {
+
+            System.out.println("Introduce la cuota mensual:");
+
+            if (entrada.hasNextDouble()) {
+                cuota = entrada.nextDouble();
+            } else {
+                cuota = -1;
+            }
+
+            entrada.nextLine();
+
+            if (cuota < 0 || !Double.isFinite(cuota)) {
+                System.out.println("Cuota incorrecta");
+            }
+
+        } while (cuota < 0 || !Double.isFinite(cuota));
+
+        return cuota;
     }
 }

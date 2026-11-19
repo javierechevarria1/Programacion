@@ -1,4 +1,6 @@
+
 package Proyecto2;
+
 import java.time.LocalDate;
 
 public class CentroDeportivo {
@@ -11,17 +13,19 @@ public class CentroDeportivo {
     private Socio[] socios;
     private int nSociosActuales;
 
-    public CentroDeportivo(String nombreCentro, String cif, int maxSocios) {
+    // Constructor
+    public CentroDeportivo(String nombreCentro, String cif, LocalDate fechaApertura, int maxSocios) {
 
         this.nombreCentro = nombreCentro;
         this.cif = cif;
-        this.fechaApertura = LocalDate.now();
+        this.fechaApertura = fechaApertura;
         this.maxSocios = maxSocios;
 
         this.socios = new Socio[maxSocios];
         this.nSociosActuales = 0;
     }
 
+    // Getters
     public String getNombreCentro() {
         return this.nombreCentro;
     }
@@ -124,14 +128,14 @@ public class CentroDeportivo {
         return resultado;
     }
 
-    // Mostrar informacion del centro
+    // Mostrar información del centro
     public String mostrarInfoCentro() {
 
         String info = "Nombre: " + this.nombreCentro
-                + " \nCIF: " + this.cif
-                + " \nFecha apertura: " + this.fechaApertura
-                + " \nMaximo socios: " + this.maxSocios
-                + " \nSocios actuales: " + this.nSociosActuales;
+                + "\nCIF: " + this.cif
+                + "\nFecha apertura: " + this.fechaApertura
+                + "\nMaximo socios: " + this.maxSocios
+                + "\nSocios actuales: " + this.nSociosActuales;
 
         return info;
     }
@@ -148,4 +152,3 @@ public class CentroDeportivo {
         return total;
     }
 }
-
