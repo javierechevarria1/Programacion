@@ -13,7 +13,7 @@ public class CuentaBancaria {
     // Atributos de la colección de movimientos
     private Movimiento[] movimientos;
     private int nMovimientosActuales;
-    private final int dimensionInicial = 100;
+    private static final int dimensionInicial = 100;
 
     // Constructor
     public CuentaBancaria(String iban, String titular) {
@@ -87,6 +87,10 @@ public class CuentaBancaria {
             Movimiento mov = new Movimiento("Ingreso", cantidad);
             this.insertarMovimiento(mov);
             resultado = true;
+
+            if (this.saldo < 0) {
+                System.out.println("AVISO: Saldo negativo");
+            }
 
             if (cantidad > LIMITE_HACIENDA) {
                 System.out.println("AVISO: Notificar a hacienda");
