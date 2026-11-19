@@ -1,6 +1,10 @@
+
 package Proyecto1;
+
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class main9 {
 
@@ -11,15 +15,15 @@ public class main9 {
         System.out.println("Introduce el nombre de la empresa:");
         String nombreEmpresa = entrada.nextLine();
 
-        System.out.println("Introduce el CIF:");
-        String cif = entrada.nextLine();
+        String cif = leerPatron(entrada, "Introduce el CIF:", "[A-Z][0-9]{10}");
+
+        LocalDate fechaFundacion = leerFecha(entrada, "Introduce la fecha de fundacion (dd/MM/aaaa):");
 
         int cantidad;
 
         do {
             System.out.println("Introduce la cantidad maxima de trabajadores:");
-            cantidad = entrada.nextInt();
-            entrada.nextLine();
+            cantidad = Integer.parseInt(leerPatron(entrada, "", "[0-9]{1,9}"));
 
             if (cantidad <= 0) {
                 System.out.println("La cantidad debe ser mayor que 0");
@@ -27,10 +31,10 @@ public class main9 {
 
         } while (cantidad <= 0);
 
-        Empresa Empresa1 = new Empresa(nombreEmpresa, cif, cantidad);
+        Empresa Empresa1 = new Empresa(nombreEmpresa, cif, fechaFundacion, cantidad);
 
         // Personas creadas pero no registradas
-        Trabajador[] personas = new Trabajador[cantidad];
+        Trabajador[] personas = new Trabajador[100];
         int nPersonas = 0;
 
         String opcion;
@@ -62,8 +66,7 @@ public class main9 {
                         System.out.println("Introduce la direccion:");
                         String direccion = entrada.nextLine();
 
-                        System.out.println("Introduce el DNI:");
-                        String dni = entrada.nextLine();
+                        String dni = leerPatron(entrada, "Introduce el DNI:", "[0-9]{8}[A-Z]");
 
                         boolean repetido = Empresa1.buscarTrabajador(dni);
 
@@ -82,16 +85,9 @@ public class main9 {
 
                         } else {
 
-                            System.out.println("Introduce la fecha de nacimiento (AAAA-MM-DD):");
-                            LocalDate fecha = LocalDate.parse(entrada.nextLine());
+                            LocalDate fecha = leerFecha(entrada, "Introduce la fecha de nacimiento (dd/MM/aaaa):");
 
-                            System.out.println("Introduce el numero de Seguridad Social:");
-                            long numeroSS = entrada.nextLong();
-                            entrada.nextLine();
-
-                            Trabajador persona = new Trabajador(
-                                    nombre, direccion, dni, fecha, numeroSS
-                            );
+                            Trabajador persona = new Trabajador(nombre, direccion, dni, fecha);
 
                             personas[nPersonas] = persona;
                             nPersonas++;
@@ -107,15 +103,23 @@ public class main9 {
 
                 case "2":
 
-                    if (nPersonas > 0) {
+                    if (Empresa1.getNumeroTrabajadores() >= Empresa1.getMaxTrabajadores()) {
+                        System.out.println("No hay espacio en la empresa");
+                        break;
+                    }
 
-                        System.out.println("Personas pendientes de registrar: ");
+                    System.out.println("1. Registrar persona existente");
+                    System.out.println("2. Registrar trabajador nuevo");
+
+                    String registro = entrada.nextLine();
+
+                    if (registro.equals("1")) {
 
                         for (int i = 0; i < nPersonas; i++) {
                             System.out.println(personas[i].mostrarInfoTrabajador());
                         }
 
-                        System.out.println("Introduce el DNI de la persona que quieres registrar:");
+                        System.out.println("Introduce el DNI de la persona:");
                         String dniRegistrar = entrada.nextLine();
 
                         int posicion = -1;
@@ -130,9 +134,19 @@ public class main9 {
 
                         if (posicion != -1) {
 
-                            if (Empresa1.RegistrarTrabajador(personas[posicion])) {
+                            Trabajador p = personas[posicion];
 
-                                System.out.println("Trabajador registrado correctamente");
+                            long ss = Long.parseLong(leerPatron(entrada, "Introduce el numero SS (10 digitos):", "[0-9]{10}"));
+
+                            Trabajador nuevo = new Trabajador(
+                                    p.getnombre(),
+                                    p.getDireccion(),
+                                    p.getDni(),
+                                    p.getFechaNacimiento(),
+                                    ss
+                            );
+
+                            if (Empresa1.RegistrarTrabajador(nuevo)) {
 
                                 for (int i = posicion; i < nPersonas - 1; i++) {
                                     personas[i] = personas[i + 1];
@@ -141,16 +155,61 @@ public class main9 {
                                 nPersonas--;
                                 personas[nPersonas] = null;
 
+                                System.out.println("Trabajador registrado correctamente");
+
                             } else {
-                                System.out.println("No se ha podido registrar el trabajador");
+                                System.out.println("No se ha podido registrar");
                             }
 
                         } else {
-                            System.out.println("No existe una persona pendiente con ese DNI");
+                            System.out.println("No existe una persona con ese DNI");
+                        }
+
+                    } else if (registro.equals("2")) {
+
+                        System.out.println("Introduce el nombre:");
+                        String nombreTrabajador = entrada.nextLine();
+
+                        System.out.println("Introduce la direccion:");
+                        String direccionTrabajador = entrada.nextLine();
+
+                        String dniTrabajador = leerPatron(entrada, "Introduce el DNI:", "[0-9]{8}[A-Z]");
+
+                        boolean duplicado = Empresa1.buscarTrabajador(dniTrabajador);
+
+                        for (int i = 0; i < nPersonas; i++) {
+
+                            if (personas[i].getDni().equalsIgnoreCase(dniTrabajador)) {
+                                duplicado = true;
+                            }
+                        }
+
+                        if (!duplicado) {
+
+                            LocalDate fecha = leerFecha(entrada, "Introduce la fecha de nacimiento (dd/MM/aaaa):");
+
+                            long ss = Long.parseLong(leerPatron(entrada, "Introduce el numero SS (10 digitos):", "[0-9]{10}"));
+
+                            Trabajador nuevo = new Trabajador(
+                                    nombreTrabajador,
+                                    direccionTrabajador,
+                                    dniTrabajador,
+                                    fecha,
+                                    ss
+                            );
+
+                            if (Empresa1.RegistrarTrabajador(nuevo)) {
+                                System.out.println("Trabajador registrado correctamente");
+                            } else {
+                                System.out.println("No se ha podido registrar");
+                            }
+
+                        } else {
+                            System.out.println("Ya existe una persona con ese DNI");
                         }
 
                     } else {
-                        System.out.println("No hay personas pendientes de registrar");
+                        System.out.println("Opcion no valida");
                     }
 
                     break;
@@ -191,7 +250,7 @@ public class main9 {
 
                     if (nPersonas > 0) {
 
-                        System.out.println("Personas pendientes: ");
+                        System.out.println("Personas pendientes:");
 
                         for (int i = 0; i < nPersonas; i++) {
                             System.out.println(personas[i].mostrarInfoTrabajador());
@@ -247,5 +306,48 @@ public class main9 {
         } while (!opcion.equals("8"));
 
         entrada.close();
+    }
+
+    // Leer y validar un texto
+    public static String leerPatron(Scanner entrada, String mensaje, String patron) {
+
+        String texto;
+
+        do {
+
+            System.out.println(mensaje);
+            texto = entrada.nextLine();
+
+            if (!texto.matches(patron)) {
+                System.out.println("Formato incorrecto");
+            }
+
+        } while (!texto.matches(patron));
+
+        return texto;
+    }
+
+    // Leer y validar una fecha
+    public static LocalDate leerFecha(Scanner entrada, String mensaje) {
+
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                .withResolverStyle(java.time.format.ResolverStyle.STRICT);
+
+        LocalDate fecha = null;
+
+        do {
+
+            System.out.println(mensaje);
+
+            try {
+                fecha = LocalDate.parse(entrada.nextLine(), formato);
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha incorrecta");
+            }
+
+        } while (fecha == null);
+
+        return fecha;
     }
 }

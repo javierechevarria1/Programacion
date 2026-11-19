@@ -1,4 +1,6 @@
+
 package Proyecto1;
+
 import java.time.LocalDate;
 
 public class Empresa {
@@ -11,11 +13,11 @@ public class Empresa {
     private Trabajador[] trabajador;
     private int nElementosActuales;
 
-    public Empresa(String tipo, String cif, int Cantidad) {
+    public Empresa(String tipo, String cif, LocalDate fechaFundacion, int Cantidad) {
 
         this.NombreEmpresa = tipo;
         this.CIF = cif;
-        this.FechaFundacion = LocalDate.now();
+        this.FechaFundacion = fechaFundacion;
         this.MaxTrabajadores = Cantidad;
 
         this.trabajador = new Trabajador[Cantidad];

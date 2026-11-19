@@ -1,4 +1,7 @@
-package Proyecto1;import java.time.LocalDate;
+
+package Proyecto1;
+
+import java.time.LocalDate;
 
 public class Trabajador {
 
@@ -8,6 +11,12 @@ public class Trabajador {
     private LocalDate FechaNacimiento;
     private long NumeroSS;
 
+    // Constructor para crear una persona
+    public Trabajador(String nombre, String Direccion, String DNI, LocalDate FechaNacimiento) {
+        this(nombre, Direccion, DNI, FechaNacimiento, 0);
+    }
+
+    // Constructor para crear un trabajador
     public Trabajador(String nombre, String Direccion, String DNI, LocalDate FechaNacimiento, long NumeroSS) {
 
         this.nombre = nombre;
@@ -37,6 +46,7 @@ public class Trabajador {
         return this.NumeroSS;
     }
 
+    // Mostrar informacion del trabajador
     public String mostrarInfoTrabajador() {
 
         String info = "Nombre: " + this.nombre
