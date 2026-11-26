@@ -30,7 +30,7 @@ public String getCod() {
 
 // Setters
         public String getTitulo() {
-            return this.titulo;
+        return this.titulo;
         }
 
         public Genero getGenero() {
