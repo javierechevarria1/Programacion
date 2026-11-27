@@ -34,7 +34,8 @@ public String getCod() {
         }
 
         public Genero getGenero() {
-            return this.genero;
+
+        return this.genero;
         }
 
         public LocalDate getFechaRegistro() {
